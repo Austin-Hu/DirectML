@@ -74,12 +74,14 @@ void DeviceResources::CreateDeviceResources()
     //
     // NOTE: Enabling the debug layer after device creation will invalidate the active device.
     {
+#if 0
         ComPtr<ID3D12Debug> debugController;
         if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(debugController.GetAddressOf()))))
         {
             debugController->EnableDebugLayer();
         }
         else
+#endif
         {
             OutputDebugStringA("WARNING: Direct3D Debug Device is not available\n");
         }
