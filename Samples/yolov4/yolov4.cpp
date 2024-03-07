@@ -537,6 +537,15 @@ void Sample::Render()
         m_labelFont->DrawString(m_spriteBatch.get(), fps, fpsPos + SimpleMath::Vector2(2.f, 2.f), SimpleMath::Vector4(0.f, 0.f, 0.f, 0.25f));
         m_labelFont->DrawString(m_spriteBatch.get(), fps, fpsPos, ATG::Colors::White);
 
+        static int frame_num = 0;
+        wchar_t frame_num_str[16];
+        swprintf_s(frame_num_str, 16, L"Frame: %d", frame_num++);
+        SimpleMath::Vector2 frameNumberSize = m_labelFont->MeasureString(frame_num_str);
+        auto frameNumberPos = SimpleMath::Vector2(safe.right - frameNumberSize.x, static_cast<float>(safe.top) + m_labelFont->GetLineSpacing() * 5.f);
+
+        m_labelFont->DrawString(m_spriteBatch.get(), frame_num_str, frameNumberPos + SimpleMath::Vector2(2.f, 2.f), SimpleMath::Vector4(0.f, 0.f, 0.f, 0.25f));
+        m_labelFont->DrawString(m_spriteBatch.get(), frame_num_str, frameNumberPos, ATG::Colors::White);
+
         m_spriteBatch->End();
 
         PIXEndEvent(commandList);
